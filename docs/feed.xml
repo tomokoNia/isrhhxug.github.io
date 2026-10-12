@@ -6,7 +6,14 @@
     <description>tomokoNia的个人博客，记录文章、笔记与想法。</description>
     <language>zh-CN</language>
     <generator>tools/build.js</generator>
-    <lastBuildDate>Mon, 12 Oct 2026 12:33:50 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 13:38:34 GMT</lastBuildDate>
     <atom:link href="https://example.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>沃对等保2.0的拙见</title>
+      <link>https://example.github.io/posts/沃对等保20的拙见/</link>
+      <guid isPermaLink="true">https://example.github.io/posts/沃对等保20的拙见/</guid>
+      <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+      <description>等保2.0在我看来，本质上是一次从“被动合规”向“主动防御”的思维升级。以前做等保1.0，很多人把它当一场考试——对照清单打勾，过了测评就万事大吉，安全设备买回来往机房一放，至于有没有真正发挥作用，没人深究。但等保2.0…</description>
+    </item>
   </channel>
 </rss>
