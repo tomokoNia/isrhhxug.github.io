@@ -1,0 +1,23 @@
+{
+  "name": "markdown-static-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "用 Markdown 写文章、用 Node.js 生成静态页面、部署到 GitHub Pages 的个人博客",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node tools/build.js",
+    "build:drafts": "node tools/build.js --drafts",
+    "dev": "node tools/dev-server.js",
+    "serve": "node tools/serve.js",
+    "clean": "node -e \"require('fs').rmSync('docs',{recursive:true,force:true});console.log('已删除 docs/')\"",
+    "new": "node tools/new-post.js"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-footnote": "^4.0.0"
+  }
+}

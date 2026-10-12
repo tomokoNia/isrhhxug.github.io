@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="{{lang}}" data-base="{{base}}"{{htmlClass}}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{title}}</title>
+    <link rel="icon" href="{{base}}favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="{{base}}site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="{{siteTitle}} · RSS" href="{{base}}feed.xml" />
+    <meta name="description" content="{{description}}" />
+    <meta name="theme-color" content="{{themeColor}}" />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:site_name" content="{{siteTitle}}" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{description}}" />
+    <meta property="og:type" content="{{ogType}}" />
+    <meta property="og:url" content="{{canonical}}" />
+    <meta property="og:locale" content="{{lang}}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{title}}" />
+    <meta name="twitter:description" content="{{description}}" />
+    <link rel="canonical" href="{{canonical}}" />
+    <link rel="stylesheet" href="{{base}}assets/style.css?v={{buildHash}}" data-blog-style />
+    {{{head}}}
+  </head>
+  <body class="{{bodyClass}}">
+    <a class="skip-link" href="#main">跳到正文</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <div class="brand">
+          <a class="brand-link" href="{{base}}">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-text">
+              <span class="brand-title">{{siteTitle}}</span>
+              <span class="brand-tagline">{{tagline}}</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn btn-icon theme-toggle" type="button" data-theme-toggle aria-label="切换浅色 / 深色模式">
+            <span class="visually-hidden">切换主题</span>
+          </button>
+          <button class="btn btn-icon menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-bars" aria-hidden="true"></span>
+            <span class="visually-hidden">展开导航</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="site-nav" id="site-nav" data-nav aria-label="站点导航">
+        <div class="wrap nav-inner">
+          <ul class="nav-list">{{{nav}}}</ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main" class="site-main">
+      {{{content}}}
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-lines">
+          {{{footerCopy}}}
+          <p class="footer-meta">© {{year}} {{author}}{{copyright}} · {{buildNote}}</p>
+        </div>
+        <ul class="footer-links">{{{footerLinks}}}</ul>
+      </div>
+    </footer>
+
+    <script src="{{base}}assets/scripts/app.js" defer></script>
+  </body>
+</html>

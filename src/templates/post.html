@@ -1,0 +1,35 @@
+<article class="wrap page page-post">
+  <div class="post-layout">
+    <div class="post-main">
+      <nav class="crumbs" aria-label="位置">
+        <a href="{{base}}">首页</a>
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        {{{crumbCategory}}}
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        <span class="crumb-current">正文</span>
+      </nav>
+
+      <header class="post-header panel">
+        <div class="panel-body">
+          <h1 class="post-title">{{postTitle}}</h1>
+          <p class="post-meta">
+            <time class="meta-item" datetime="{{dateISO}}">{{dateText}}</time>
+            {{{metaExtra}}}
+          </p>
+        </div>
+      </header>
+
+      <div class="prose entry" data-entry>
+        {{{article}}}
+      </div>
+
+      <footer class="post-footer">
+        {{{postNav}}}
+      </footer>
+    </div>
+
+    <aside class="post-aside" aria-label="文章目录">
+      {{{toc}}}
+    </aside>
+  </div>
+</article>

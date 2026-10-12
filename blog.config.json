@@ -1,0 +1,49 @@
+{
+  "$comment": "网站全局配置。想改网站名称、简介、作者、链接、分页数量，改这里就够了。",
+  "site": {
+    "title": "tomokoNia",
+    "tagline": "",
+    "description": "",
+    "author": "tomokoNia",
+    "email": "",
+    "lang": "zh-CN",
+    "timezone": "Asia/Shanghai",
+    "url": "https://example.github.io",
+    "base": "/",
+    "postsPerPage": 8,
+    "themeColor": "#2f6fc4",
+    "nav": [
+      {
+        "label": "首页",
+        "href": "/"
+      },
+      {
+        "label": "归档",
+        "href": "/archive/"
+      },
+      {
+        "label": "关于",
+        "href": "/about/"
+      }
+    ],
+    "footerText": "",
+    "social": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/your-name"
+      }
+    ]
+  },
+  "feed": {
+    "limit": 20,
+    "copyright": ""
+  },
+  "theme": {
+    "default": "auto",
+    "accent": "#2f6fc4"
+  },
+  "markdown": {
+    "tocMin": 2,
+    "tocMax": 3
+  }
+}

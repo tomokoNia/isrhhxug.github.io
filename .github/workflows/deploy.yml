@@ -1,0 +1,66 @@
+name: 构建并部署到 GitHub Pages
+
+# 什么时候运行？
+#   1. 每次把改动 push 到 main 分支
+#   2. 也可以在 GitHub 网页的 Actions 页面手动点一下运行
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# GitHub Pages 部署需要的权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同时只允许一个部署任务；新的 push 会取消排队中的旧任务，但不会打断正在进行的部署
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: 构建静态网站
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 配置 GitHub Pages
+        # 这一步会根据仓库自动算出网站地址和子路径
+        uses: actions/configure-pages@v5
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 构建网站
+        # 自动判断这是"用户站点"（用户名.github.io）还是"项目站点"（其它仓库名）
+        # 从而决定站点地址与子路径，不需要手动改 blog.config.json
+        env:
+          SITE_URL: https://${{ github.repository_owner }}.github.io
+          SITE_BASE: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '/' || format('/{0}/', github.event.repository.name) }}
+        run: npm run build
+
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    name: 发布到 GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署
+        id: deployment
+        uses: actions/deploy-pages@v4

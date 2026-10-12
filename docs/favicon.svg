@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="site icon">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9d4f5"/>
+      <stop offset="1" stop-color="#4b8ad6"/>
+    </linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a3dd6a"/>
+      <stop offset="0.5" stop-color="#6cba36"/>
+      <stop offset="1" stop-color="#3f8420"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 圆角外框 -->
+  <rect x="3" y="4" width="58" height="56" rx="7" fill="url(#sky)" stroke="#1d4d92" stroke-width="2"/>
+
+  <!-- 太阳 -->
+  <circle cx="45" cy="19" r="7" fill="#fff3c4" opacity="0.95"/>
+
+  <!-- 一朵像素云 -->
+  <g fill="#ffffff" opacity="0.8">
+    <rect x="13" y="15" width="16" height="5" rx="2.5"/>
+    <rect x="17" y="11" width="9" height="5" rx="2.5"/>
+  </g>
+
+  <!-- 地平线 -->
+  <rect x="4" y="38" width="56" height="2" fill="#ffffff" opacity="0.45"/>
+
+  <!-- 草地 -->
+  <path d="M3 40 H61 V53 A7 7 0 0 1 54 60 H10 A7 7 0 0 1 3 53 Z" fill="url(#land)"/>
+
+  <!-- 远处的斜坡，让地平线不那么直 -->
+  <path d="M34 40 Q44 31 61 36 V42 H34 Z" fill="#7cc247"/>
+</svg>
