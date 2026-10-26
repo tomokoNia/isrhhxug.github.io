@@ -522,10 +522,6 @@ function renderPagination(pagination, site) {
 }
 
 function renderPostCards(posts, site) {
-  if (!posts.length) {
-    return `<li class="post-card"><p class="post-card-excerpt">这里还没有文章。往 <code>src/posts/</code> 里放一个 <code>.md</code> 文件，然后重新构建即可。</p></li>`;
-  }
-
   return posts
     .map((post) => {
       const category = post.category
@@ -923,7 +919,10 @@ async function generateHome(posts) {
       listNote: isFirst
         ? `共 ${posts.length} 篇 · 每页 ${site.postsPerPage} 篇`
         : `第 ${pageNumber} / ${chunks.length} 页`,
-      list: renderPostCards(chunks[index], site),
+      // 只有整个博客一篇文章都没有时，才显示"还没有文章"的提示
+      list: posts.length
+        ? renderPostCards(chunks[index], site)
+        : '<li class="post-card"><p class="post-card-excerpt">这里还没有文章。往 <code>src/posts/</code> 里放一个 <code>.md</code> 文件，然后重新构建即可。</p></li>',
       pagination: renderPagination({ current: pageNumber, totalPages: chunks.length }, site),
     });
 
