@@ -332,10 +332,24 @@ node tools/verify.js
 
 它会检查生成结果里有没有坏链接、有没有残留的模板占位符等。**部署前跑一下心里更踏实。**
 
-### 关于 `docs/` 目录
+### 关于 `docs/` 目录：不需要提交到 Git
 
-- 它是**构建产物**，不要手动改里面的文件，下次构建会被覆盖；
-- 它**需要提交到 Git**（GitHub Pages 要靠它，同时你也多了一份历史备份）。
+这一点很重要，能省掉你很多困惑：
+
+- `docs/` 是**构建产物**。里面的 `.html`、`.css` 都是脚本根据 `src/` 生成的，
+  不要手动改，下次构建会被覆盖；
+- 它**不需要提交到 Git**。项目里的 `.gitignore` 已经把 `docs/` 排除了。
+  真正需要提交的只有你写的东西（`.md`、图片）和配置。
+
+那网站靠什么生成？靠 **GitHub Actions 在云端构建**：
+你 `git push` 只推了那个 `.md` 文件，GitHub 服务器收到后自己跑 `npm run build`，
+在服务器上把 `.html` 生成出来，再发布到 Pages。
+
+所以正常写作时你**永远不需要在本地运行构建**，也**不需要提交任何 `.html` 文件**。
+
+> 那什么时候要本地构建？只有在你想**在本地看效果**的时候：
+> `npm run dev` 会自己构建并在浏览器里打开。构建结果留在 `docs/` 里，
+> 但因为它被 `.gitignore` 排除了，不会污染你的提交。
 
 ---
 
@@ -395,14 +409,19 @@ git push -u origin main
 
 ### 第一次之后，怎么发布新文章
 
+**你只需要提交 `.md` 文件：**
+
 ```bash
-git add .
+git add src/posts/
 git commit -m "新增：一篇文章"
 git push
 ```
 
 推送完成后 GitHub Actions 会自动构建并发布，一两分钟后网站就更新了。
-**不需要在本地运行任何构建命令。**
+
+> **不需要**在本地运行 `npm run build`，**也不需要**提交任何 `.html` 文件。
+> 那些 HTML 是 GitHub 服务器自己生成的，`docs/` 已经被 `.gitignore` 排除，
+> 就算你在本地构建了也不会被提交。
 
 ### 想让 RSS 和 sitemap 里的链接正确
 
@@ -715,7 +734,7 @@ box-shadow: inset 2px 2px 0 var(--bevel-darker), inset -1px -1px 0 var(--bevel-l
 
 | 路径 | 原因 |
 | --- | --- |
-| `docs/` 里的所有文件 | 构建产物，下次构建会被整个覆盖 |
+| `docs/` 里的所有文件 | 构建产物，下次构建会被整个覆盖。而且它已被 `.gitignore` 排除，改了也不会生效。 |
 
 ---
 
@@ -757,8 +776,8 @@ blog/
 │       ├── markdown.js           Markdown → HTML
 │       └── highlighter.js        代码语法高亮
 │
-├── docs/                         构建产物（GitHub Pages 发布的就是这里）
-├── .github/workflows/deploy.yml  自动部署
+├── docs/                         构建产物（自动生成，不提交到 Git）
+├── .github/workflows/deploy.yml  自动部署（在 GitHub 云端构建）
 ├── package.json
 └── README.md
 ```

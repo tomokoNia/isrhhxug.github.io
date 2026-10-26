@@ -5,3 +5,7 @@ npm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# 构建产物：由 GitHub Actions 在云端生成，不需要提交。
+# 你在本地跑 npm run build 也不会再往仓库里塞一堆 HTML。
+docs/
