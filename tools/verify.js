@@ -40,12 +40,23 @@ function sitePathToFile(sitePath, fromFile) {
   if (clean.startsWith('/')) {
     clean = clean.replace(/^\/+/, '');
   } else if (clean.startsWith('../') || clean.startsWith('./')) {
-    return path.resolve(baseDir, clean);
+    return safeDecode(path.resolve(baseDir, clean));
   } else if (/^[a-z]+:/i.test(clean)) {
     return null; // 外部链接
   }
 
-  return path.join(OUT_DIR, clean);
+  // HTML 里的中文文件名会被写成 %E5%9B%BE%E7%89%87 这种形式，
+  // 要解码回中文才能和磁盘上的文件名对上（浏览器自己也会解码）。
+  return safeDecode(path.join(OUT_DIR, clean));
+}
+
+/** decodeURIComponent 遇到非法转义会抛错，这里兜底返回原值 */
+function safeDecode(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    return value;
+  }
 }
 
 /** 目录路径补 index.html */
